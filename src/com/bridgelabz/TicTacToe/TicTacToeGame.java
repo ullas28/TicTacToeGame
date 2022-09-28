@@ -30,6 +30,16 @@ public class TicTacToeGame {
     public char getComputerSymbol() {
         return computerSymbol;
     }
+
+    /**
+     * @param row is for Row position on the board
+     * @param col is for Column position on the board
+     * @return It will give 0-based array index
+     */
+    private static int getIndex(int row, int col) {
+        return 3 * (row - 1) + (col - 1);
+    }
+
     /*
     * Choosing player symbol either 'X' or 'O'
     *
@@ -47,10 +57,29 @@ public class TicTacToeGame {
             System.out.println("Invalid Symbol");
     }
 
+    /**
+     * Printing the board
+     */
+    public void showBoard() {
+        for (int i = 1; i <= 3; i++) {
+            for (int j = 1; j <= 3; j++) {
+                if (j == 3)
+                    System.out.print(board[getIndex(i, j)]);
+                else
+                    System.out.print(board[getIndex(i, j)] + " | ");
+
+            }
+            System.out.println("");
+            if (i != 3)
+                System.out.println("---------");
+        }
+    }
+
 
     public static void main(String[] args) {
         TicTacToeGame game = new TicTacToeGame();
         System.out.println("Player symbol is: " + game.getPlayerSymbol());
         System.out.println("initial:");
+        game.showBoard();
     }
 }
