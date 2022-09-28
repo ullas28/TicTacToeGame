@@ -347,5 +347,18 @@ public class TicTacToeGame {
                 break;
             }
         }
+        /*
+        * Checking user ability to play another game
+        */
+
+        System.out.println("Play again? (y/n): ");
+        String choice = sc.next();
+        sc.nextLine();
+        if (choice.equalsIgnoreCase("Y"))
+            TicTacToeGame.main(args);
+        else
+            sc.close();
+
     }
+
 }
