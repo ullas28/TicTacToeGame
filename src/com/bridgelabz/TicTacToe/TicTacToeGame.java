@@ -1,8 +1,7 @@
 package com.bridgelabz.TicTacToe;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TicTacToeGame {
     private static final char EMPTY = ' ';
@@ -189,7 +188,7 @@ public class TicTacToeGame {
         if (move != -1)
             return move;
         // else: try to find empty corner
-        move = -1;
+        move = getEmptyCorner();
         if (move != -1)
             return move;
         // else: try to find empty center or non-corner move
@@ -229,6 +228,23 @@ public class TicTacToeGame {
         }
 
         return winningPosition;
+    }
+
+    /*
+    * If neither of the players aren't winning, the computer
+    * will select empty corner
+    * */
+
+    private int getEmptyCorner() {
+        List<Integer> corners = Arrays.asList(1, 3, 7, 9);
+        List<Integer> emptyCorners = corners.stream().filter(position -> this.isFree(position))
+                .collect(Collectors.toList());
+
+        if (emptyCorners.isEmpty())
+            return -1;
+
+        Collections.shuffle(emptyCorners);
+        return emptyCorners.get(0);
     }
 
 
