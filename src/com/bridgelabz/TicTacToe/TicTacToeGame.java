@@ -30,7 +30,11 @@ public class TicTacToeGame {
     public char getComputerSymbol() {
         return computerSymbol;
     }
-
+    /*
+    * Choosing player symbol either 'X' or 'O'
+    *
+    * @param playerSymbol
+    * */
 
     public void choosePlayerSymbol(char playerSymbol) {
         if (playerSymbol == CROSS) {
