@@ -145,6 +145,21 @@ public class TicTacToeGame {
             System.out.println("Illegal move!");
     }
 
+    /**
+     * Toss method to select who plays first
+     */
+    private int toss() {
+        int tossResult = (int) Math.floor(Math.random() * 10) % 2;
+        if (tossResult == 1) {
+            System.out.println("User plays first");
+            choosePlayerSymbol(CROSS);
+            return 1;
+        } else {
+            System.out.println("Computer plays first");
+            choosePlayerSymbol(ROUND);
+            return 0;
+        }
+    }
 
     public static void main(String[] args) {
         TicTacToeGame game = new TicTacToeGame();
