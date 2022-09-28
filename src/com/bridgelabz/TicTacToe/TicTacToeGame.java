@@ -192,7 +192,7 @@ public class TicTacToeGame {
         if (move != -1)
             return move;
         // else: try to find empty center or non-corner move
-        move = -1;
+        move = getEmptyCentreOrNonCorner();
         if (move != -1)
             return move;
         // settle for a random position
@@ -245,6 +245,25 @@ public class TicTacToeGame {
 
         Collections.shuffle(emptyCorners);
         return emptyCorners.get(0);
+    }
+
+    /*
+    *If corners are not available, then takes centre
+    * Lastly any of the available sides*/
+    private int getEmptyCentreOrNonCorner() {
+        // check if center is empty
+        if (isFree(5))
+            return 5;
+        // then check for non-corner sides
+        List<Integer> nonCornerSides = Arrays.asList(2, 4, 6, 8);
+        List<Integer> emptyNonCornerSides = nonCornerSides.stream().filter(position -> this.isFree(position))
+                .collect(Collectors.toList());
+
+        if (emptyNonCornerSides.isEmpty())
+            return -1;
+
+        Collections.shuffle(emptyNonCornerSides);
+        return emptyNonCornerSides.get(0);
     }
 
 
