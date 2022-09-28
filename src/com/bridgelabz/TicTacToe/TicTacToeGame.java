@@ -9,6 +9,7 @@ public class TicTacToeGame {
     private char[] board;
     private char playerSymbol;
     private char computerSymbol;
+    private int moveCount;
 
 
     TicTacToeGame() {
@@ -16,11 +17,15 @@ public class TicTacToeGame {
         Arrays.fill(board,EMPTY);
     }
 
-    private TicTacToeGame(char[] board, char playerSymbol, char computerSymbol) {
+    private TicTacToeGame(char[] board, char playerSymbol, char computerSymbol,int moves) {
         this.board = board;
         this.playerSymbol = playerSymbol;
         this.computerSymbol = computerSymbol;
+        this.moveCount = moves;
+    }
 
+    private TicTacToeGame getCopy() {
+        return new TicTacToeGame(Arrays.copyOf(this.board, 10), this.playerSymbol, this.computerSymbol, this.moveCount);
     }
 
     public char getPlayerSymbol() {
@@ -30,6 +35,11 @@ public class TicTacToeGame {
     public char getComputerSymbol() {
         return computerSymbol;
     }
+
+    public int getMoveCount() {
+        return moveCount;
+    }
+
 
     /**
      * @param row is for Row position on the board
@@ -75,6 +85,29 @@ public class TicTacToeGame {
         }
     }
 
+    /**
+     * Check if an Index is free or not
+     *
+     * @param row , selecting row
+     * @param col , selecting column
+     * @return If position is full, then it will return false
+     */
+    private boolean isFree(int row, int col) {
+        if (row > 3 || row < 1 || col > 3 || col < 1)
+            System.out.println("Invalid position!");
+
+        if (board[getIndex(row, col)] == EMPTY)
+            return true;
+        return false;
+    }
+
+    private boolean isFree(int position) {
+        if (position < 1 || position > 9)
+            System.out.println("Invalid position!");
+        if (board[position - 1] == EMPTY)
+            return true;
+        return false;
+    }
 
     public static void main(String[] args) {
         TicTacToeGame game = new TicTacToeGame();
