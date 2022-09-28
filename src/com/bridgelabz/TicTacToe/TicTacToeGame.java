@@ -109,6 +109,43 @@ public class TicTacToeGame {
         return false;
     }
 
+    /**
+     * Player makes a move
+     *
+     * @param row Row positions to move
+     * @param col Column positions to move
+     */
+    public void playerMove(int row, int col) {
+        if (row > 3 || row < 1 || col > 3 || col < 1) {
+            System.out.println("Invalid move!");
+            return;
+        }
+
+        if (isFree(row, col)) {
+            board[getIndex(row, col)] = playerSymbol;
+            System.out.println("After player move");
+            moveCount++;
+            showBoard();
+        } else
+            System.out.println("Illegal move!");
+
+    }
+
+    public void playerMove(int position) {
+        if (position < 1 || position > 9) {
+            System.out.println("Invalid move!");
+            return;
+        }
+
+        if (isFree(position)) {
+            board[position - 1] = playerSymbol;
+            moveCount++;
+
+        } else
+            System.out.println("Illegal move!");
+    }
+
+
     public static void main(String[] args) {
         TicTacToeGame game = new TicTacToeGame();
         System.out.println("Player symbol is: " + game.getPlayerSymbol());
