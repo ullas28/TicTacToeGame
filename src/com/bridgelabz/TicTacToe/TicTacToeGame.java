@@ -266,13 +266,48 @@ public class TicTacToeGame {
         return emptyNonCornerSides.get(0);
     }
 
+    /**
+     * Shows the winning condition
+     * Till the board is full or
+     * If one of the players win
+     * @param symbol user or computer symbol to check winning condition
+     * @return zero if no winning condition is reached
+     */
+    private int winningPosition(char symbol) {
+        // horizontal
+        if (board[getIndex(1, 1)] == symbol && board[getIndex(1, 2)] == symbol && board[getIndex(1, 3)] == symbol)
+            return 1;
+        if (board[getIndex(2, 1)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(2, 3)] == symbol)
+            return 2;
+        if (board[getIndex(3, 1)] == symbol && board[getIndex(3, 2)] == symbol && board[getIndex(3, 3)] == symbol)
+            return 3;
+
+        // vertical
+        if (board[getIndex(1, 1)] == symbol && board[getIndex(2, 1)] == symbol && board[getIndex(3, 1)] == symbol)
+            return 4;
+        if (board[getIndex(1, 2)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(3, 2)] == symbol)
+            return 5;
+        if (board[getIndex(1, 3)] == symbol && board[getIndex(2, 3)] == symbol && board[getIndex(3, 3)] == symbol)
+            return 6;
+
+        // diagonal
+        if (board[getIndex(1, 1)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(3, 3)] == symbol)
+            return 7;
+
+        // off diagonal
+        if (board[getIndex(1, 3)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(3, 1)] == symbol)
+            return 8;
+
+        return 0;
+
+    }
 
     public boolean hasPlayerWon() {
-        return (playerSymbol) != 0;
+        return winningPosition(playerSymbol) != 0;
     }
 
     public boolean hasComputerWon() {
-        return (computerSymbol) != 0;
+        return winningPosition(computerSymbol) != 0;
     }
 
     public static void main(String[] args) {
