@@ -166,9 +166,27 @@ public class TicTacToeGame {
         }
     }
 
-    public void computerMove() {
+    /*
+    * Computer is checking its move,
+    * if it can win, then it will make that move
+    * @param move
+    */
 
+    public void computerMove() {
+        int move = getBestComputerMove();
+        if (move == -1)
+            return;
+        board[move - 1] = computerSymbol;
+        moveCount++;
     }
+
+    private int getBestComputerMove() {
+        if (isOver())
+            return -1;
+
+        return -1;
+    }
+
 
     public boolean hasPlayerWon() {
         return (playerSymbol) != 0;
