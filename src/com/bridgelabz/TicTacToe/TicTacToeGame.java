@@ -1,6 +1,7 @@
 package com.bridgelabz.TicTacToe;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToeGame {
@@ -183,8 +184,51 @@ public class TicTacToeGame {
     private int getBestComputerMove() {
         if (isOver())
             return -1;
+        // first: block player's winning move
+        int move = nextWinningMovePosition();
+        if (move != -1)
+            return move;
+        // else: try to find empty corner
+        move = -1;
+        if (move != -1)
+            return move;
+        // else: try to find empty center or non-corner move
+        move = -1;
+        if (move != -1)
+            return move;
+        // settle for a random position
+        Random random = new Random();
+        move = random.nextInt(9) + 1;
+        while (!isFree(move))
+            move = random.nextInt(9) + 1;
+        return move;
+    }
 
-        return -1;
+    /*
+    *Checking if opponent can win and then play to block it
+    *
+     */
+
+    private int nextWinningMovePosition() {
+        if (moveCount < 2)
+            return -1;
+        TicTacToeGame temp = this.getCopy();
+
+        temp.choosePlayerSymbol(this.playerSymbol);
+        int winningPosition = -1;
+        for (int position = 1; position <= 9; position++) {
+            if (temp.isFree(position)) {
+                temp.playerMove(position);
+                if (temp.hasPlayerWon()) {
+                    winningPosition = position;
+                    break;
+                }
+                temp = this.getCopy();
+
+            }
+        }
+
+        return winningPosition;
     }
 
 
