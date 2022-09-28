@@ -1,6 +1,7 @@
 package com.bridgelabz.TicTacToe;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class TicTacToeGame {
     private static final char EMPTY = ' ';
@@ -34,6 +35,10 @@ public class TicTacToeGame {
 
     public char getComputerSymbol() {
         return computerSymbol;
+    }
+
+    public boolean isOver() {
+        return moveCount >= 9;
     }
 
     public int getMoveCount() {
@@ -161,10 +166,54 @@ public class TicTacToeGame {
         }
     }
 
+    public void computerMove() {
+
+    }
+
+    public boolean hasPlayerWon() {
+        return (playerSymbol) != 0;
+    }
+
+    public boolean hasComputerWon() {
+        return (computerSymbol) != 0;
+    }
+
     public static void main(String[] args) {
         TicTacToeGame game = new TicTacToeGame();
         System.out.println("Player symbol is: " + game.getPlayerSymbol());
         System.out.println("initial:");
         game.showBoard();
+        int whoPlaysFirst = game.toss();
+        Scanner sc = new Scanner(System.in);
+
+        if (whoPlaysFirst == 0) {
+            game.computerMove();
+            System.out.println("After computer move");
+            game.showBoard();
+        }
+
+        while (true) {
+            if (!game.hasComputerWon()) {
+                System.out.print("Enter position to play[1-9]: ");
+                game.playerMove(sc.nextInt());
+                System.out.println("After player move");
+                game.showBoard();
+            } else {
+                System.out.println("COMPUTER WINS!");
+                break;
+            }
+            if (!game.hasPlayerWon()) {
+                game.computerMove();
+                System.out.println("After computer move");
+                game.showBoard();
+            } else {
+                System.out.println("YOU WIN!");
+                break;
+            }
+            if (game.isOver()) {
+                System.out.println("DRAW!");
+                break;
+            }
+        }
     }
 }
